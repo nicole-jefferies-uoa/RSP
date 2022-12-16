@@ -54,17 +54,33 @@ public:
         return NULL;
     }
 
-    void delete_node(int data){
-        if(listHead == NULL)
+    void delete_node(int data)
+    {
+        if (listHead == NULL)
             return;
 
-        if(listHead->data == data)
+        if (listHead->data == data)
             listHead = listHead->next_node;
 
-        if(search_list == NULL)
-            std:cout << 
-    }
+        else
+        {
+            node *currentNode = listHead;
+            while (currentNode->next_node != NULL)
+            {
+                if (currentNode->next_node->data == data)
+                {
+                    currentNode->next_node = currentNode->next_node->next_node;
+                    delete currentNode;
+                    std::cout << data << " successfully deleted" << std::endl;
+                    return;
+                }
 
+                currentNode = currentNode->next_node;
+            }
+
+            std::cout << data << " not found in linked list; deletion unsuccessful" << std::endl;
+        }
+    }
 };
 
 int main()
@@ -76,6 +92,9 @@ int main()
 
     list.search_list(7);
     list.search_list(17);
+
+    list.delete_node(3);
+    list.delete_node(22);
 
     return 0;
 }
