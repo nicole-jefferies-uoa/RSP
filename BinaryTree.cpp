@@ -87,10 +87,10 @@ public:
     
     void printInOrder(node *rootNode)
     {
-        if (!treeEmpty(rootNode))
+        if (rootNode != NULL)
         {
-            std::cout << rootNode->data << std::endl;
             printInOrder(rootNode->left_child);
+            std::cout << rootNode->data << std::endl;
             printInOrder(rootNode->right_child);
         }
     }
@@ -114,7 +114,6 @@ public:
         {
             if (rootNode->left_child == NULL && rootNode->right_child == NULL)
             {
-                delete (rootNode);
                 this->rootNode = NULL;
                 return NULL;
             }
@@ -126,7 +125,6 @@ public:
                     temp = rootNode->right_child;
                 else
                     temp = rootNode->left_child;
-                delete(rootNode);
                 this->rootNode = temp;
                 return temp;
             }
@@ -151,19 +149,34 @@ public:
 
 int main()
 {
+
+    std::cout << "Creating new binary tree with root 12" << std::endl;
+
     binary_tree *tree = new binary_tree(12);
 
+    tree->printInOrder();
+
     tree->insert_new_node(26);
+
+    std::cout << "Inserted 26" << std::endl;
+
+    tree->insert_new_node(78);
+
+    std::cout << "Inserted 78" << std::endl;
 
     tree->printInOrder();
 
     tree->insert_new_node(34);
 
-    tree->printInOrder();
-
-    tree->delete_node(26);
+    std::cout << "Inserted 34" << std::endl;
 
     tree->printInOrder();
+
+    //tree->delete_node(34);
+
+    //std::cout << "Deleted 34" << std::endl;
+
+    //tree->printInOrder();
 
     return 0;
 }
